@@ -39,34 +39,34 @@ module top (
     wire [15:0] addr_engine;
     wire        we0_engine, we1_engine;
     wire [3:0]  din_engine;
-    wire [3:0]  dout_bank0, dout_bank1;
+    wire [3:0]  dout_bank0_a, dout_bank0_b, dout_bank1_a, dout_bank1_b;
 
     wire [15:0] addr_display;
     wire        ram_select;
 
-    wire [15:0] addr0 = we0 ? addr_engine : (ram_select ? addr_engine : addr_display);
-    wire [15:0] addr1 = we1 ? addr_engine : (ram_select ? addr_display : addr_engine);
-    wire        we0   = we0_engine;
-    wire        we1   = we1_engine;
-    wire [3:0]  din   = din_engine;
-
-    gol_ram bank0 (
-        .clk  (pix_clk),
-        .addr (addr0),
-        .we   (we0),
-        .din  (din),
-        .dout (dout_bank0)
+    // Dual-port: port A = display read, port B = engine read/write.
+    // Engine reads DISPLAY bank (current frame), writes OTHER bank (next frame). INIT writes both via we0/we1.
+    gol_ram_dual bank0 (
+        .clk   (pix_clk),
+        .addr_a(addr_display),
+        .dout_a(dout_bank0_a),
+        .addr_b(addr_engine),
+        .we_b  (we0_engine),
+        .din_b (din_engine),
+        .dout_b(dout_bank0_b)
     );
 
-    gol_ram bank1 (
-        .clk  (pix_clk),
-        .addr (addr1),
-        .we   (we1),
-        .din  (din),
-        .dout (dout_bank1)
+    gol_ram_dual bank1 (
+        .clk   (pix_clk),
+        .addr_a(addr_display),
+        .dout_a(dout_bank1_a),
+        .addr_b(addr_engine),
+        .we_b  (we1_engine),
+        .din_b (din_engine),
+        .dout_b(dout_bank1_b)
     );
 
-    wire [3:0] dout_display = ram_select ? dout_bank1 : dout_bank0;
+    wire [3:0] dout_display = ram_select ? dout_bank1_a : dout_bank0_a;
 
     wire video_sof;
     wire init_done;
@@ -76,8 +76,8 @@ module top (
         .clk        (pix_clk),
         .rst        (sys_rst),
         .video_sof  (video_sof),
-        .dout_bank0 (dout_bank0),
-        .dout_bank1 (dout_bank1),
+        .dout_bank0 (dout_bank0_b),
+        .dout_bank1 (dout_bank1_b),
         .ram_select (ram_select),
         .init_done  (init_done),
         .state_out  (engine_state),

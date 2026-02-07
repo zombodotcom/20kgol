@@ -18,8 +18,8 @@ module gol_engine (
     output reg         we1,
     output reg [3:0]   din
 );
-    // Source bank = update bank (we read from the bank we're updating)
-    wire [3:0] dout_src = ram_select ? dout_bank0 : dout_bank1;
+    // Read from DISPLAY bank (current frame); write next frame to the other bank (dual-port allows both)
+    wire [3:0] dout_src = ram_select ? dout_bank1 : dout_bank0;
 
     localparam [3:0] S_INIT         = 4'd0,
                      S_READ_CENTER  = 4'd1,

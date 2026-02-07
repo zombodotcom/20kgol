@@ -9,8 +9,8 @@ Analyzing Verilog file 'C:\Users\zombo\Desktop\Programming\20kgol\src\top.v'
 Analyzing Verilog file 'C:\Users\zombo\Desktop\Programming\20kgol\TangNano-20K-example\hdmi\src\dvi_tx\dvi_tx.v'
 Compiling module 'top'("C:\Users\zombo\Desktop\Programming\20kgol\src\top.v":5)
 Compiling module 'TMDS_rPLL'("C:\Users\zombo\Desktop\Programming\20kgol\TangNano-20K-example\hdmi\src\gowin_rpll\TMDS_rPLL.v":9)
-Compiling module 'gol_ram'("C:\Users\zombo\Desktop\Programming\20kgol\src\gol_ram.v":5)
-Extracting RAM for identifier 'mem'("C:\Users\zombo\Desktop\Programming\20kgol\src\gol_ram.v":12)
+Compiling module 'gol_ram_dual'("C:\Users\zombo\Desktop\Programming\20kgol\src\gol_ram.v":25)
+Extracting RAM for identifier 'mem'("C:\Users\zombo\Desktop\Programming\20kgol\src\gol_ram.v":34)
 Compiling module 'gol_engine'("C:\Users\zombo\Desktop\Programming\20kgol\src\gol_engine.v":6)
 Compiling module 'svo_hdmi'("C:\Users\zombo\Desktop\Programming\20kgol\src\svo_hdmi.v":5)
 Compiling module 'video_source_gol'("C:\Users\zombo\Desktop\Programming\20kgol\src\video_source_gol.v":5)

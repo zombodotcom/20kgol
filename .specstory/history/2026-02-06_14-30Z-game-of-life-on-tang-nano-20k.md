@@ -15432,3 +15432,29 @@ After rebuilding and running, the Game of Life field should evolve correctly; th
 
 ---
 
+_**User**_
+
+game of lifer not moving still
+
+---
+
+_**Agent (model default, mode Agent)**_
+
+<think><details><summary>Thought Process</summary>
+
+The user says the Game of Life is still not moving. I fixed the center_cell pipeline bug earlier - latching center in the first cycle of READ_NEIGH instead of in READ_CENTER. If it's still static, there could be other issues:
+
+1. **Display reading wrong bank** - Maybe the display is reading the bank that the engine is writing to (so it shows the half-updated or stale buffer)?
+2. **Bank swap timing** - Maybe we swap ram_select at SOF but the engine hasn't finished the frame yet, or we're showing the wrong bank.
+3. **Address mux in top.v** - Maybe when engine is reading/writing, the display gets wrong address or wrong bank's data.
+4. **Init writing wrong data** - Maybe both banks aren't getting the same pattern, or init is wrong.
+5. **Write enable / which bank we write to** - In ADVANCE we have we0 <= ram_select, we1 <= ~ram_select. So when ram_select=0 (display reads bank0), we write to we1 (bank1). So we're writing to the "other" bank. That's correct.
+6. **dout_src in engine** - dout_src = ram_select ? dout_bank0 : dout_bank1. So when ram_select=0, display reads bank0, and we're updating bank1, so we read from bank1 for our source. dout_src = dout_bank1. Correct.
+7. **Maybe the engine never leaves INIT?** Or never gets video_sof? Or gets stuck in a state?
+8. **Gol_ram read-during-write** - When we write and read same cycle, what does dout show? In gol_ram: always @(posedge clk) begin if (we) mem[addr] <= din; dout <= mem[addr]; end. So dout is registered - it shows the value at addr from the *previous* read. If we write to addr and read from addr in same cycle, dout will show old value (correct for our pipeline - we're not reading back what we just wrote in the same cycle). So that's fine.
+9. **Concurrent access** - Display and engine share the same two RAMs. Top muxes addresses: addr0 = we0 ? addr_engine : (ram_select ? addr_engine : addr_display). So at any time, bank0 gets either engine addr (when we0, or when ram_select and not we0) or display addr. When engine is reading from bank0 (ram_select=1, we0=0), bank0 gets addr_engine. When engine is writing to bank0 (we0=1), bank0 gets addr_engine. When display is reading bank0 (ram_select=0, we0=0), bank0 gets addr_display. So there's a conflict: when ram_select=1 and engine is *reading* bank0 (no write), bank0 gets addr_engine. Display wants to read bank1 when ram_select=1 (dout_display = ram_select ? dout_bank1 : dout_bank0). So when ram_select=1, display reads from bank1. So bank0 is only used by engine when ram_select=1. So bank0's address is addr_engine when (we0 || ram_select). And bank1's address is addr_engine when we1, else addr_display when ram_select, else addr_engine. When ram_select=0, display reads bank0, so bank0 gets addr_display when !we0. And bank1 gets addr_engine when we1, else addr_display? No: addr1 = we1 ? addr_engine : (ram_select ? addr_display : addr_engine). So when ram_select=0, addr1 = we1 ? addr_engine : addr_engine. So bank1 always gets addr_engine when ram_select=0! So when we're updating bank1 (ram_select=0), bank1 gets addr_engine - correct. And display reads bank0 which gets addr_display - correct. Good.
+
+Let me think about the display pipeline. video_sou</details></think>
+
+---
+

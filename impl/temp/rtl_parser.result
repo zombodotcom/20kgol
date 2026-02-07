@@ -1,5 +1,13 @@
 [
  {
+  "InstFile" : "C:/Users/zombo/Desktop/Programming/20kgol/src/gol_ram.v",
+  "InstLine" : 5,
+  "InstName" : "gol_ram",
+  "ModuleFile" : "C:/Users/zombo/Desktop/Programming/20kgol/src/gol_ram.v",
+  "ModuleLine" : 5,
+  "ModuleName" : "gol_ram"
+ },
+ {
   "InstFile" : "C:/Users/zombo/Desktop/Programming/20kgol/src/top.v",
   "InstLine" : 5,
   "InstName" : "top",
@@ -17,19 +25,19 @@
    },
    {
     "InstFile" : "C:/Users/zombo/Desktop/Programming/20kgol/src/top.v",
-    "InstLine" : 53,
+    "InstLine" : 49,
     "InstName" : "bank0",
     "ModuleFile" : "C:/Users/zombo/Desktop/Programming/20kgol/src/gol_ram.v",
-    "ModuleLine" : 5,
-    "ModuleName" : "gol_ram"
+    "ModuleLine" : 25,
+    "ModuleName" : "gol_ram_dual"
    },
    {
     "InstFile" : "C:/Users/zombo/Desktop/Programming/20kgol/src/top.v",
-    "InstLine" : 61,
+    "InstLine" : 59,
     "InstName" : "bank1",
     "ModuleFile" : "C:/Users/zombo/Desktop/Programming/20kgol/src/gol_ram.v",
-    "ModuleLine" : 5,
-    "ModuleName" : "gol_ram"
+    "ModuleLine" : 25,
+    "ModuleName" : "gol_ram_dual"
    },
    {
     "InstFile" : "C:/Users/zombo/Desktop/Programming/20kgol/src/top.v",
