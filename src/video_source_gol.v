@@ -26,17 +26,15 @@ module video_source_gol (
     wire [7:0] gol_x = gol_x_12[7:0];
     wire [7:0] gol_y = gol_y_12[7:0];
 
-    // Prefetch: send addr for NEXT pixel so dout (1-cycle latency) matches current pixel
-    wire [7:0] gol_x_next = (gol_x == 8'd255) ? 8'd0 : (gol_x + 8'd1);
-    wire [7:0] gol_y_next = (gol_x == 8'd255) ? ((gol_y == 8'd255) ? 8'd0 : (gol_y + 8'd1)) : gol_y;
-    wire [15:0] addr_next = {gol_y_next, gol_x_next};
+    // Request CURRENT cell; dout arrives 1 cycle later and matches current pixel (species <= dout)
+    wire [15:0] addr_cur = {gol_y, gol_x};
 
     reg        de_d1;
     reg        in_grid_d1;
     reg [4:0]  species;   // dout delayed 1 cycle (now for current pixel)
 
     always @(posedge clk) begin
-        addr       <= in_grid ? addr_next : 16'd0;
+        addr       <= in_grid ? addr_cur : 16'd0;
         de_d1      <= de;
         in_grid_d1 <= in_grid;
         species    <= dout;
