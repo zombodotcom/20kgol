@@ -1,0 +1,39 @@
+GowinSynthesis start
+Running parser ...
+Analyzing Verilog file 'C:\Users\zombo\Desktop\Programming\20kgol\TangNano-20K-example\hdmi\src\gowin_rpll\TMDS_rPLL.v'
+Analyzing Verilog file 'C:\Users\zombo\Desktop\Programming\20kgol\src\gol_ram.v'
+Analyzing Verilog file 'C:\Users\zombo\Desktop\Programming\20kgol\src\gol_engine.v'
+Analyzing Verilog file 'C:\Users\zombo\Desktop\Programming\20kgol\src\video_source_gol.v'
+Analyzing Verilog file 'C:\Users\zombo\Desktop\Programming\20kgol\src\svo_hdmi.v'
+Analyzing Verilog file 'C:\Users\zombo\Desktop\Programming\20kgol\src\top.v'
+Analyzing Verilog file 'C:\Users\zombo\Desktop\Programming\20kgol\TangNano-20K-example\hdmi\src\dvi_tx\dvi_tx.v'
+Compiling module 'top'("C:\Users\zombo\Desktop\Programming\20kgol\src\top.v":5)
+Compiling module 'TMDS_rPLL'("C:\Users\zombo\Desktop\Programming\20kgol\TangNano-20K-example\hdmi\src\gowin_rpll\TMDS_rPLL.v":9)
+Compiling module 'gol_ram'("C:\Users\zombo\Desktop\Programming\20kgol\src\gol_ram.v":5)
+Extracting RAM for identifier 'mem'("C:\Users\zombo\Desktop\Programming\20kgol\src\gol_ram.v":12)
+Compiling module 'gol_engine'("C:\Users\zombo\Desktop\Programming\20kgol\src\gol_engine.v":6)
+Compiling module 'svo_hdmi'("C:\Users\zombo\Desktop\Programming\20kgol\src\svo_hdmi.v":5)
+Compiling module 'video_source_gol'("C:\Users\zombo\Desktop\Programming\20kgol\src\video_source_gol.v":5)
+WARN  (EX3791) : Expression size 9 truncated to fit in target size 4("C:\Users\zombo\Desktop\Programming\20kgol\src\svo_hdmi.v":130)
+Compiling module 'DVI_TX_Top'("C:\Users\zombo\Desktop\Programming\20kgol\TangNano-20K-example\hdmi\src\dvi_tx\dvi_tx.v":1072)
+Compiling module '**'("C:\Users\zombo\Desktop\Programming\20kgol\TangNano-20K-example\hdmi\src\dvi_tx\dvi_tx.v":1071)
+NOTE  (EX0101) : Current top module is "top"
+[5%] Running netlist conversion ...
+Running device independent optimization ...
+[10%] Optimizing Phase 0 completed
+[15%] Optimizing Phase 1 completed
+[25%] Optimizing Phase 2 completed
+Running inference ...
+[30%] Inferring Phase 0 completed
+[40%] Inferring Phase 1 completed
+[50%] Inferring Phase 2 completed
+[55%] Inferring Phase 3 completed
+Running technical mapping ...
+[60%] Tech-Mapping Phase 0 completed
+[65%] Tech-Mapping Phase 1 completed
+[75%] Tech-Mapping Phase 2 completed
+[80%] Tech-Mapping Phase 3 completed
+[90%] Tech-Mapping Phase 4 completed
+[95%] Generate netlist file "C:\Users\zombo\Desktop\Programming\20kgol\impl\gwsynthesis\gol_20k.vg" completed
+[100%] Generate report file "C:\Users\zombo\Desktop\Programming\20kgol\impl\gwsynthesis\gol_20k_syn.rpt.html" completed
+GowinSynthesis finish

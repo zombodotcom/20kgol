@@ -4,16 +4,16 @@ overview: Implement a 256×256 toroidal Game of Life with 7 species on the Tang 
 todos:
   - id: segment-1
     content: "Segment 1 — gol_ram: implement, testbench (write/read, latency), synthesize and confirm BRAM"
-    status: pending
+    status: completed
   - id: segment-2
     content: "Segment 2 — gol_engine: implement, testbench (init, one cell, SOF), synthesize and confirm DFF"
-    status: pending
+    status: completed
   - id: segment-3
     content: "Segment 3 — video + HDMI: tmds_encoder, svo_hdmi, video_source_gol; test/synth each"
-    status: pending
+    status: completed
   - id: segment-4
     content: "Segment 4 — top + constraints: full integration, timing closure, on-board check"
-    status: pending
+    status: completed
 isProject: false
 ---
 
