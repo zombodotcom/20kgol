@@ -11,6 +11,8 @@ module gol_engine (
     input  wire [3:0]  dout_bank1,
     output reg         ram_select,   // 0 = display bank0, 1 = display bank1 → update bank = ~ram_select
     output wire        init_done,    // 0 during INIT (blank display), 1 after
+    output wire [3:0]  state_out,    // FSM state for debug (0=INIT,1=READ_CENTER,2=READ_NEIGH,3=APPLY,4=ADVANCE,5=IDLE)
+    output wire [15:0] gen_count,   // generations completed (increments each frame after swap)
     output reg [15:0]  addr,
     output reg         we0,
     output reg         we1,
@@ -32,6 +34,7 @@ module gol_engine (
     reg [2:0]  neighbor_idx;     // 0..7
     reg [1:0]  init_phase;       // 0 or 1 for dual-write during INIT
     reg [15:0] init_addr;
+    reg [15:0] gen_count_r;      // generations completed
 
     // LFSR for random seed (16-bit)
     reg [15:0] lfsr;
@@ -59,7 +62,9 @@ module gol_engine (
     assign neighbor_addr[6] = {y_next, x};
     assign neighbor_addr[7] = {y_next, x_next};
 
-    assign init_done = (state != S_INIT);
+    assign init_done  = (state != S_INIT);
+    assign state_out  = state;
+    assign gen_count  = gen_count_r;
 
     // Next cell state from Conway + species rules
     wire center_alive = (center_cell != 4'd0);
@@ -82,9 +87,10 @@ module gol_engine (
             we0        <= 0;
             we1        <= 0;
             din        <= 0;
-            init_phase <= 0;
-            init_addr  <= 0;
-            lfsr       <= 16'hACE1;
+            init_phase  <= 0;
+            init_addr   <= 0;
+            gen_count_r <= 16'd0;
+            lfsr        <= 16'hACE1;
             center_cell   <= 0;
             alive_count   <= 0;
             species_a     <= 0;
@@ -118,11 +124,12 @@ module gol_engine (
                     we0 <= 0;
                     we1 <= 0;
                     if (video_sof) begin
-                        ram_select <= ~ram_select;
-                        cell_index <= 0;
-                        x          <= 0;
-                        y          <= 0;
-                        state      <= S_READ_CENTER;
+                        ram_select   <= ~ram_select;
+                        gen_count_r  <= gen_count_r + 16'd1;
+                        cell_index   <= 0;
+                        x            <= 0;
+                        y            <= 0;
+                        state        <= S_READ_CENTER;
                     end
                 end
 

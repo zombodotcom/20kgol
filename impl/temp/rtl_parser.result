@@ -33,7 +33,7 @@
    },
    {
     "InstFile" : "C:/Users/zombo/Desktop/Programming/20kgol/src/top.v",
-    "InstLine" : 73,
+    "InstLine" : 75,
     "InstName" : "engine",
     "ModuleFile" : "C:/Users/zombo/Desktop/Programming/20kgol/src/gol_engine.v",
     "ModuleLine" : 6,
@@ -41,7 +41,7 @@
    },
    {
     "InstFile" : "C:/Users/zombo/Desktop/Programming/20kgol/src/top.v",
-    "InstLine" : 90,
+    "InstLine" : 94,
     "InstName" : "svo",
     "ModuleFile" : "C:/Users/zombo/Desktop/Programming/20kgol/src/svo_hdmi.v",
     "ModuleLine" : 5,
@@ -49,7 +49,7 @@
     "SubInsts" : [
      {
       "InstFile" : "C:/Users/zombo/Desktop/Programming/20kgol/src/svo_hdmi.v",
-      "InstLine" : 91,
+      "InstLine" : 93,
       "InstName" : "video_gol",
       "ModuleFile" : "C:/Users/zombo/Desktop/Programming/20kgol/src/video_source_gol.v",
       "ModuleLine" : 5,
@@ -59,7 +59,7 @@
    },
    {
     "InstFile" : "C:/Users/zombo/Desktop/Programming/20kgol/src/top.v",
-    "InstLine" : 111,
+    "InstLine" : 117,
     "InstName" : "DVI_TX_Top_inst",
     "ModuleFile" : "C:/Users/zombo/Desktop/Programming/20kgol/TangNano-20K-example/hdmi/src/dvi_tx/dvi_tx.v",
     "ModuleLine" : 1072,

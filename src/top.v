@@ -70,6 +70,8 @@ module top (
 
     wire video_sof;
     wire init_done;
+    wire [3:0] engine_state;
+    wire [15:0] gen_count;
     gol_engine engine (
         .clk        (pix_clk),
         .rst        (sys_rst),
@@ -78,6 +80,8 @@ module top (
         .dout_bank1 (dout_bank1),
         .ram_select (ram_select),
         .init_done  (init_done),
+        .state_out  (engine_state),
+        .gen_count  (gen_count),
         .addr       (addr_engine),
         .we0        (we0_engine),
         .we1        (we1_engine),
@@ -92,6 +96,8 @@ module top (
         .rst          (sys_rst),
         .init_done    (init_done),
         .ram_select   (ram_select),
+        .debug_state  (engine_state),
+        .debug_gen    (gen_count),
         .dout_display (dout_display),
         .addr_display (addr_display),
         .hsync        (),
