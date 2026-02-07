@@ -38,8 +38,8 @@ module top (
 
     wire [15:0] addr_engine;
     wire        we0_engine, we1_engine;
-    wire [3:0]  din_engine;
-    wire [3:0]  dout_bank0_a, dout_bank0_b, dout_bank1_a, dout_bank1_b;
+    wire [4:0]  din_engine;
+    wire [4:0]  dout_bank0_a, dout_bank0_b, dout_bank1_a, dout_bank1_b;
 
     wire [15:0] addr_display;
     wire        ram_select;
@@ -66,22 +66,24 @@ module top (
         .dout_b(dout_bank1_b)
     );
 
-    wire [3:0] dout_display = ram_select ? dout_bank1_a : dout_bank0_a;
+    wire [4:0] dout_display = ram_select ? dout_bank1_a : dout_bank0_a;
 
-    wire video_sof;
+    wire video_sof, gen_sof;  // gen_sof = every Nth frame for speed control
     wire init_done;
     wire [3:0] engine_state;
     wire [15:0] gen_count;
+    wire [511:0] pop_count;
     gol_engine engine (
         .clk        (pix_clk),
         .rst        (sys_rst),
-        .video_sof  (video_sof),
+        .video_sof  (gen_sof),   // use gen_sof (gated) for engine speed control
         .dout_bank0 (dout_bank0_b),
         .dout_bank1 (dout_bank1_b),
         .ram_select (ram_select),
         .init_done  (init_done),
         .state_out  (engine_state),
         .gen_count  (gen_count),
+        .pop_count  (pop_count),
         .addr       (addr_engine),
         .we0        (we0_engine),
         .we1        (we1_engine),
@@ -98,6 +100,7 @@ module top (
         .ram_select   (ram_select),
         .debug_state  (engine_state),
         .debug_gen    (gen_count),
+        .pop_count    (pop_count),
         .dout_display (dout_display),
         .addr_display (addr_display),
         .hsync        (),
@@ -106,6 +109,7 @@ module top (
         .pixel_x      (),
         .pixel_y      (),
         .video_sof    (video_sof),
+        .gen_sof       (gen_sof),
         .rgb_r        (rgb_r),
         .rgb_g        (rgb_g),
         .rgb_b        (rgb_b),

@@ -6,10 +6,10 @@ module gol_ram (
     input  wire        clk,
     input  wire [15:0]  addr,
     input  wire        we,
-    input  wire [3:0]   din,
-    output reg  [3:0]   dout
+    input  wire [4:0]   din,
+    output reg  [4:0]   dout
 );
-    reg [3:0] mem [0:65535];
+    reg [4:0] mem [0:65535];
 
     always @(posedge clk) begin
         if (we)
@@ -25,13 +25,13 @@ endmodule
 module gol_ram_dual (
     input  wire        clk,
     input  wire [15:0]  addr_a,
-    output reg  [3:0]   dout_a,
+    output reg  [4:0]   dout_a,
     input  wire [15:0]  addr_b,
     input  wire        we_b,
-    input  wire [3:0]   din_b,
-    output reg  [3:0]   dout_b
+    input  wire [4:0]   din_b,
+    output reg  [4:0]   dout_b
 );
-    reg [3:0] mem [0:65535];
+    reg [4:0] mem [0:65535];
 
     always @(posedge clk) begin
         dout_a <= mem[addr_a];

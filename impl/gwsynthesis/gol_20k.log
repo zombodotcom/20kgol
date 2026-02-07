@@ -14,6 +14,9 @@ Extracting RAM for identifier 'mem'("C:\Users\zombo\Desktop\Programming\20kgol\s
 Compiling module 'gol_engine'("C:\Users\zombo\Desktop\Programming\20kgol\src\gol_engine.v":6)
 Compiling module 'svo_hdmi'("C:\Users\zombo\Desktop\Programming\20kgol\src\svo_hdmi.v":5)
 Compiling module 'video_source_gol'("C:\Users\zombo\Desktop\Programming\20kgol\src\video_source_gol.v":5)
+WARN  (EX3791) : Expression size 9 truncated to fit in target size 8("C:\Users\zombo\Desktop\Programming\20kgol\src\svo_hdmi.v":257)
+WARN  (EX3791) : Expression size 9 truncated to fit in target size 8("C:\Users\zombo\Desktop\Programming\20kgol\src\svo_hdmi.v":258)
+WARN  (EX3791) : Expression size 9 truncated to fit in target size 8("C:\Users\zombo\Desktop\Programming\20kgol\src\svo_hdmi.v":259)
 Compiling module 'DVI_TX_Top'("C:\Users\zombo\Desktop\Programming\20kgol\TangNano-20K-example\hdmi\src\dvi_tx\dvi_tx.v":1072)
 Compiling module '**'("C:\Users\zombo\Desktop\Programming\20kgol\TangNano-20K-example\hdmi\src\dvi_tx\dvi_tx.v":1071)
 NOTE  (EX0101) : Current top module is "top"
