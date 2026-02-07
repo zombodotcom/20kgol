@@ -1,0 +1,3 @@
+[submodule "TangNano-20K-example"]
+	path = TangNano-20K-example
+	url = https://github.com/sipeed/TangNano-20K-example.git
