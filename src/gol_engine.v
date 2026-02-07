@@ -137,7 +137,7 @@ module gol_engine (
                     we0 <= 0;
                     we1 <= 0;
                     addr <= {y, x};
-                    center_cell <= dout_src;   // use previous cycle's read (pipeline: next state will use this)
+                    // center value arrives next cycle (1-cycle RAM latency); don't latch dout_src here
                     alive_count <= 0;
                     species_a   <= 0;
                     species_b   <= 0;
@@ -150,8 +150,10 @@ module gol_engine (
                 S_READ_NEIGH: begin
                     we0 <= 0;
                     we1 <= 0;
-                    // This cycle: output neighbor address; dout_src is from *previous* neighbor
-                    if (neighbor_idx > 3'd0) begin
+                    // dout_src this cycle: center when neighbor_idx==0, else previous neighbor
+                    if (neighbor_idx == 3'd0)
+                        center_cell <= dout_src;
+                    else if (neighbor_idx > 3'd0) begin
                         if (dout_src != 4'd0) begin
                             alive_count <= alive_count + 4'd1;
                             if (species_count == 2'd0) species_a <= dout_src;
